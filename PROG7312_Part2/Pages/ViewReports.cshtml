@@ -1,0 +1,49 @@
+﻿@page
+@model PROG7312_Part2.Pages.ViewReportsModel
+@{
+    ViewData["Title"] = "View All Reports";
+}
+
+@using System.IO
+
+<div class="container-fluid">
+    <div class="card mb-4" style="width: 100%; height: auto">
+        <div class="card-header">
+            <h2>All Submitted Reports</h2>
+        </div>
+        <div class="card-body">
+            @if (Model.Reports.Count == 0)
+            {
+                <p>No reports available at this time.</p>
+            }
+            else
+            {
+                <div class="row">
+                    @foreach (var report in Model.Reports)
+                    {
+                        <div class="col-md-4">
+                            <div class="card report-card mb-3">
+                                <div class="card-header">
+                                    <h5>Category: @report.Value.Category</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Location:</strong> @report.Value.Location</p>
+                                    <p><strong>Description:</strong> @report.Value.Description</p>
+                                    <p><strong>Date Submitted:</strong> @report.Key.ToString("g")</p>
+                                    @if (!string.IsNullOrEmpty(report.Value.ImagePath))
+                                    {
+                                        <a class="btn btn-primary" href="@Url.Content("~/images/" + Model.GetFileName(report.Value.ImagePath))" target="_blank">View Media</a>
+                                    }
+                                    else
+                                    {
+                                        <p>No media attached.</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
