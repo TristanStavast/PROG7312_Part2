@@ -1,104 +1,104 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Routing;
 using PROG7312_Part2.Models;
 
 namespace PROG7312_Part2.Pages
 {
     public class ServiceReqStatusModel : PageModel
     {
+        // A static Binary Search Tree (BST) to hold service requests.
         private static BST requestBST = new BST();
         private MinHeap requestHeap = new MinHeap();
 
+        // Flag to check if the BST has already been initialized.
         private static bool isBSTInitialized = false;
 
+        // List to hold all the service requests for display.
         public List<ServiceRequest> requests { get; set; } = new List<ServiceRequest>();
+        // Message to show user feedback 
         public string Message { get; set; }
 
+        // This method handles the page load (GET request).
         public void OnGet()
         {
-            Console.WriteLine("ON GET TRIGGERED!!");
-
+            // Initialize the requests only once by checking if the BST has been initialized.
             if (!isBSTInitialized)
             {
-                Console.WriteLine("Initializing BST");
+                // Populate the requests list with sample data.
                 InitializeRequests();
 
-                foreach(var request in requests) 
+                // Insert all requests into the BST and MinHeap for later use.
+                foreach (var request in requests)
                 {
                     requestBST.Insert(request);
                     requestHeap.Insert(request);
                 }
 
+                // Set the flag to prevent re-initialization of the BST.
                 isBSTInitialized = true;
-                Console.WriteLine("BST Initialization Complete.");
-
             }
-
             requestBST.PrintBST();
         }
 
+        // This method handles the search functionality (POST request).
         public IActionResult OnPostSearch(int requestId)
         {
-            Console.WriteLine($"OnPostSearch triggered with Req ID: {requestId}");
-            var testRequest = requestBST.Search(1);
-            Console.WriteLine(testRequest);
-
+            // Check if the BST is available; if not, return an error message.
             if (requestBST == null)
             {
-                Console.WriteLine("BST is not initialized!");
+                // Set error message when the BST is not available.
                 Message = "Service request list is not available";
                 requests.Clear();
-
                 return Page();
             }
 
+            // Search the BST for a request with the specified ID.
             var request = requestBST.Search(requestId);
 
+            // If a request is found, set a success message and update the requests list.
             if (request != null)
             {
-                Console.WriteLine($"Found test request: {testRequest.Description}");
+                // Display the request details in the message.
                 Message = $"Request ID: {requestId}: {request.Description} - {request.Status}";
-                requests = new List<ServiceRequest> { request };
-
-                Console.WriteLine($"Found Request: ID: {request.Id}, Description: {request.Description}, Status: {request.Status}");
+                requests = new List<ServiceRequest> { request }; 
             }
             else
             {
+                // If no request is found, inform the user.
                 Message = $"Request ID {requestId} was not found!";
-                //requests.Clear();
-
-                Console.WriteLine($"No request found with ID: {requestId}");
             }
 
-            Console.WriteLine("Requests after search");
-            foreach(var req in requests)
+            // Log the search result to the console (useful for debugging).
+            foreach (var req in requests)
             {
                 Console.WriteLine($"ID: {req.Id}, Description: {req.Description}, Status: {req.Status}");
             }
-
             return Page();
         }
 
+        // This method handles refreshing the list of requests (POST request).
         public IActionResult OnPostRefresh()
         {
+            // Reset the BST and initialize requests again.
             requestBST = new BST();
             InitializeRequests();
 
-            foreach(var request in requests)
+            // Re-insert all requests into the BST (and MinHeap, though not used here).
+            foreach (var request in requests)
             {
                 requestBST.Insert(request);
             }
 
+            // Set a message to inform the user that the list has been refreshed.
             Message = "Requests have been refreshed!";
-            Console.WriteLine("Requests refreshed and reinitialized.");
-
             return Page();
         }
 
+        // Helper method to initialize and populate the requests list.
         private void InitializeRequests()
         {
             #region Adding Service Requests
+            // Add various sample service requests with different statuses.
             requests.Add(new ServiceRequest { Id = 1, Description = "Water Leakage", Status = "In Progress" });
             requests.Add(new ServiceRequest { Id = 2, Description = "Power Outage", Status = "Completed" });
             requests.Add(new ServiceRequest { Id = 3, Description = "Road Repair", Status = "Pending" });
@@ -132,9 +132,10 @@ namespace PROG7312_Part2.Pages
             #endregion
         }
 
+        // Helper method to check if the BST is empty (used for error handling).
         private bool IsBSTEmpty()
         {
-            return requestBST.Search(int.MaxValue) == null;
+            return requestBST.Search(int.MaxValue) == null; 
         }
     }
 }

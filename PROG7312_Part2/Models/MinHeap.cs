@@ -2,14 +2,17 @@
 {
     public class MinHeap
     {
+        // List to store heap elements
         private List<ServiceRequest> heap = new List<ServiceRequest>();
 
+        // Inserts a new request into the heap and re-adjusts the heap
         public void Insert(ServiceRequest request)
         {
             heap.Add(request);
-            HeapifyUp();
+            HeapifyUp(); // Adjust the heap to maintain the min-heap property
         }
 
+        // Moves the newly added element up to its correct position
         private void HeapifyUp()
         {
             int index = heap.Count - 1;
@@ -22,6 +25,7 @@
             }
         }
 
+        // Extracts the smallest element (root) and re-adjusts the heap
         public ServiceRequest ExtractMin()
         {
             if (heap.Count == 0)
@@ -30,10 +34,11 @@
             var min = heap[0];
             heap[0] = heap[heap.Count - 1];
             heap.RemoveAt(heap.Count - 1);
-            HeapifyDown();
+            HeapifyDown(); // Adjust the heap after removal
             return min;
         }
 
+        // Moves the root element down to its correct position
         private void HeapifyDown()
         {
             int index = 0;
