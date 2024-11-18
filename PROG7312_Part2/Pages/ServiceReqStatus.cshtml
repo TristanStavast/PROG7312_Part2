@@ -1,4 +1,116 @@
 ﻿@page
 @model PROG7312_Part2.Pages.ServiceReqStatusModel
-@{
-}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Request Status</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    <style>
+        .progress {
+            border-radius: 15px; /* Rounded corners for the progress bar */
+            background-color: #cdcdcd; /* Light grey background for the progress track */
+            height: 20px; /* Increase height for better visibility */
+            margin-bottom: 20px; /* Space below the progress bar */
+            border: 1px solid #b4b4b4;
+        }
+
+        .progress-bar {
+            background-color: #84c85d; /* Green color for the progress */
+            border-radius: 10px; /* Rounded corners for the progress fill */
+            transition: width 0.3s ease; /* Smooth transition for the width change */
+            color: black; /* Text color inside the progress bar */
+            font-weight: bold; /* Make the text bold */
+            line-height: 20px; /* Center the text vertically */
+        }
+
+            /* Custom colors for the request stages */
+            .progress-bar.pending {
+                background-color: #ffc107;
+            }
+            /* Yellow for Pending */
+            .progress-bar.review {
+                background-color: #17a2b8;
+            }
+            /* Blue for Under Review */
+            .progress-bar.in-progress {
+                background-color: #007bff;
+            }
+            /* Blue for In Progress */
+            .progress-bar.completed {
+                background-color: #28a745;
+            }
+        /* Green for Completed */
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Search form card -->
+        <div class="card mb-4" style="width: 100%; height: auto">
+            <div class="card-header">
+                <h2>Search Service Request Status</h2>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group">
+                        @* <label for="searchId">Enter Request ID to Search:</label> *@
+                        <input type="number" placeholder="Request ID" id="searchId" name="requestId" class="form-control d-inline-block w-75" required />
+                    </div>
+                    <div class="form-group mt-2">
+                        <button type="submit" class="btn btn-primary" asp-page-handler="Search">Search</button>
+                        <button type="submit" class="btn btn-secondary ms-2" asp-page-handler="Refresh" formnovalidate>Refresh</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Search results card -->
+        <div class="card mb-4" style="width: 100%; height: auto">
+            <div class="card-header">
+                <h2>Search Results</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.requests != null && Model.requests.Any())
+                {
+                    <div class="row">
+                        @foreach (var req in Model.requests)
+                        {
+                            <div class="col-md-4">
+                                <div class="card mb-3 search-result-card">
+                                    <div class="card-header">
+                                        <h5>Request ID: @req.Id</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>Description:</strong> @req.Description</p>
+                                        <p><strong>Status:</strong> @req.Status</p>
+                                        <!-- Progress Bar -->
+                                        <div class="progress">
+                                            <div class="progress-bar
+                                                @(req.Status == "Pending" ? "pending" :
+                                                  req.Status == "Under Review" ? "review" :
+                                                  req.Status == "In Progress" ? "in-progress" :
+                                                  "completed")"
+                                                 style="width: @(req.Status == "Pending" ? "25%" :
+                                                  req.Status == "Under Review" ? "50%" :
+                                                  req.Status == "In Progress" ? "75%" :
+                                                  "100%")">
+                                                @req.Status
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p>No requests found or matching your search.</p>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

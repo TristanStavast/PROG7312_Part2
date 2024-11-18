@@ -21,6 +21,8 @@ namespace PROG7312_Part2.Pages
             InitializeEvent();
             GetUpcomingEvents(LocalEventsDic);
             LoadRecommendedCategories();
+
+            ViewData["UpcomingEvents"] = UpcomingEvents;
         }
 
         //Initialising on each search on page
@@ -54,37 +56,37 @@ namespace PROG7312_Part2.Pages
             #region Music Events
             // Music Events
             var ev1 = new Event { Title = "Music Concert", Category = "Music", Date = new DateOnly(2023, 10, 20), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.music } }; // Future event
-            var ev2 = new Event { Title = "Jazz Night", Category = "Music", Date = new DateOnly(2024, 10, 15) }; // Recent event
+            var ev2 = new Event { Title = "Jazz Night", Category = "Music", Date = new DateOnly(2024, 10, 15), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.music } }; // Recent event
             var ev3 = new Event { Title = "OktoberFest", Category = "Music", Date = new DateOnly(2024, 10, 26), CardDisplayInfo = new EventCardDisplayInfo {CardColor = EventCardColors.music}  }; // Future event
-            var ev4 = new Event { Title = "EDM Festival", Category = "Music", Date = new DateOnly(2024, 10, 28) }; // Future event
+            var ev4 = new Event { Title = "EDM Festival", Category = "Music", Date = new DateOnly(2024, 10, 28), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.music } }; // Future event
             var ev5 = new Event { Title = "Classical Evening", Category = "Music", Date = new DateOnly(2024, 11, 1), CardDisplayInfo = new EventCardDisplayInfo {CardColor = EventCardColors.music}  }; // Upcoming event
             #endregion
 
             #region Education Events
             // Education Events
-            var ev6 = new Event { Title = "Reeces Pieces Workshop", Category = "Education", Date = new DateOnly(2025, 1, 12) }; // Future event
-            var ev7 = new Event { Title = "Science Fair", Category = "Education", Date = new DateOnly(2024, 10, 30) }; // Upcoming event
-            var ev8 = new Event { Title = "VC Open Day", Category = "Education", Date = new DateOnly(2025, 2, 25) }; // Future event
-            var ev9 = new Event { Title = "Career Day", Category = "Education", Date = new DateOnly(2025, 3, 30) }; // Future event
-            var ev10 = new Event { Title = "Check Reece Spelling Day", Category = "Education", Date = new DateOnly(2025, 4, 12) }; // Future event
+            var ev6 = new Event { Title = "Reeces Pieces Workshop", Category = "Education", Date = new DateOnly(2025, 1, 12), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.education } }; // Future event
+            var ev7 = new Event { Title = "Science Fair", Category = "Education", Date = new DateOnly(2024, 10, 30), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.education } }; // Upcoming event
+            var ev8 = new Event { Title = "VC Open Day", Category = "Education", Date = new DateOnly(2025, 2, 25), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.education } }; // Future event
+            var ev9 = new Event { Title = "Career Day", Category = "Education", Date = new DateOnly(2025, 3, 30), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.education } }; // Future event
+            var ev10 = new Event { Title = "Check Reece Spelling Day", Category = "Education", Date = new DateOnly(2025, 4, 12), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.education } }; // Future event
             #endregion
 
             #region Arts Events
             // Arts Events
-            var ev11 = new Event { Title = "Art Exhibition", Category = "Arts", Date = new DateOnly(2024, 11, 23) }; // Future event
-            var ev12 = new Event { Title = "Photography Workshop", Category = "Arts", Date = new DateOnly(2024, 11, 5) }; // Upcoming event
-            var ev13 = new Event { Title = "Sculpture Fair", Category = "Arts", Date = new DateOnly(2025, 1, 5) }; // Future event
-            var ev14 = new Event { Title = "Painting Masterclass", Category = "Arts", Date = new DateOnly(2025, 2, 15) }; // Future event
-            var ev15 = new Event { Title = "Cultural Festival", Category = "Arts", Date = new DateOnly(2025, 3, 10) }; // Future event
+            var ev11 = new Event { Title = "Art Exhibition", Category = "Arts", Date = new DateOnly(2024, 11, 23), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.art } }; // Future event
+            var ev12 = new Event { Title = "Photography Workshop", Category = "Arts", Date = new DateOnly(2024, 11, 5), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.art } }; // Upcoming event
+            var ev13 = new Event { Title = "Sculpture Fair", Category = "Arts", Date = new DateOnly(2025, 1, 5), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.art } }; // Future event
+            var ev14 = new Event { Title = "Painting Masterclass", Category = "Arts", Date = new DateOnly(2025, 2, 15), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.art } }; // Future event
+            var ev15 = new Event { Title = "Cultural Festival", Category = "Arts", Date = new DateOnly(2025, 3, 10), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.art } }; // Future event
             #endregion
 
             #region Sports Events
             // Sports Events
-            var ev16 = new Event { Title = "SA20", Category = "Sports", Date = new DateOnly(2025, 1, 15), CardDisplayInfo = new EventCardDisplayInfo {CardColor = EventCardColors.music} }; // Future event
-            var ev17 = new Event { Title = "Nicks 5m Dash", Category = "Sports", Date = new DateOnly(2024, 11, 3) }; // Upcoming event
-            var ev18 = new Event { Title = "Marathon 2025", Category = "Sports", Date = new DateOnly(2025, 2, 20), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.music } }; // Future event
-            var ev19 = new Event { Title = "URC Final", Category = "Sports", Date = new DateOnly(2025, 4, 5) }; // Future event
-            var ev20 = new Event { Title = "Swimming Gala", Category = "Sports", Date = new DateOnly(2025, 5, 10), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.music } }; // Future event
+            var ev16 = new Event { Title = "SA20", Category = "Sports", Date = new DateOnly(2025, 1, 15), CardDisplayInfo = new EventCardDisplayInfo {CardColor = EventCardColors.sport} }; // Future event
+            var ev17 = new Event { Title = "Nicks 5m Dash", Category = "Sports", Date = new DateOnly(2024, 11, 3), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.sport } }; // Upcoming event
+            var ev18 = new Event { Title = "Marathon 2025", Category = "Sports", Date = new DateOnly(2025, 2, 20), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.sport } }; // Future event
+            var ev19 = new Event { Title = "URC Final", Category = "Sports", Date = new DateOnly(2025, 4, 5), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.sport } }; // Future event
+            var ev20 = new Event { Title = "Swimming Gala", Category = "Sports", Date = new DateOnly(2025, 5, 10), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.sport } }; // Future event
             #endregion
 
             #region Adding All Events

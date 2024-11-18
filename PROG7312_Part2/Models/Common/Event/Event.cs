@@ -17,6 +17,10 @@
     {
         public const string standard = "#d5d8dc";
         public const string music = "#45b39d";
+        public const string education = "#8fb8ef";
+        public const string art = "#efc58f";
+        public const string sport = "#ef8fbc";
+
 
 
     }

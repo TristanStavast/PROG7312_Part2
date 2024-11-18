@@ -109,3 +109,17 @@ body {
     font-weight: bold; /* Make the text bold */
     line-height: 20px; /* Center the text vertically */
 }
+
+.search-result-card {
+    border: 0.7px solid black;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease ease-in-out
+}
+
+    .search-result-card:hover {
+        border-color: #4caf50;
+        transform: scale(1.02);
+    }
+
+
