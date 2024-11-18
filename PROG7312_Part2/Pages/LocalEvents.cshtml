@@ -4,10 +4,53 @@
     ViewData["Title"] = "Local Events and Announcements";
 }
 
+<style>
+    .event-card{
+        display: flex;
+        flex-direction: column;
+        padding: 1em;
+        border-radius: 1em;
+
+        
+    }
+
+    .reminder-container{
+        display: flex;
+        flex-direction: row;
+        width: max-content;
+        height: 4.4em;
+        border-radius: 1em;
+        padding: 1em;
+        background: #f2f3f4;
+        font-size: 1em;
+        gap: 1.2em;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .reminders{
+        height: 2em;
+        width: 2em;
+        border-radius: 50%;
+        background: #45b39d;
+        font-size: 1em;
+        text-align: center;
+        display: flex; /* Enables flexbox */
+        justify-content: center; /* Centers content horizontally */
+        align-items: center;
+    }
+    .filter-container{
+        background: #f2f3f4;
+        border-radius: 2em;
+    }
+
+    
+</style>
+
 <h1 class="text-center">Local Events and Announcements</h1>
 
 <form method="post" asp-page-handler="Search" class="mb-4">
-    <div class="form-group">
+    <div class="col-md-6 form-group filter-container">
         <label for="category">Category:</label>
         <select id="category" name="category" class="form-control">
             <option value="Music">Music</option>
@@ -24,6 +67,19 @@
 
     <div>
         <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+
+    <div class="upcoming-container">
+        <div class="reminder-container">
+            <div>
+                Upcoming Events
+            </div>
+            @if (Model.UpcomingEvents.Count > 0) {
+                <div class="reminders">
+                    @Model.UpcomingEvents.Count
+                </div>
+            }
+        </div>
     </div>
 </form>
 
@@ -67,13 +123,28 @@
                 <div class="card-body scrollable" style="max-height: 300px; overflow-y: auto;">
                     @if (Model.SearchResults != null && Model.SearchResults.Any())
                     {
-                        <ul>
-                            @foreach (var eventItem in Model.SearchResults)
+                        <ul style="display: flex; flex-wrap: wrap; gap: 2em; list-style-type: none;">
+                            @* @foreach (var eventItem in Model.SearchResults)
                             {
                                 <li>
                                     <strong>@eventItem.Title</strong><br />
                                     Category: @eventItem.Category<br />
                                     Date: @eventItem.Date.ToString("dd MMM yyyy")
+                                </li>
+                            } *@
+
+                            @foreach (var eventItem in Model.SearchResults)
+                            {
+                                <li>
+                                    <div class="event-card" style="background: @eventItem.CardDisplayInfo.CardColor">
+                                        <div class="event-head">
+                                            <h4>@eventItem.Title</h4>
+                                        </div>
+                                        <div class="event-body">
+                                            Category: @eventItem.Category<br />
+                                            Date: @eventItem.Date.ToString("dd MMM yyyy")
+                                        </div>
+                                    </div>
                                 </li>
                             }
                         </ul>

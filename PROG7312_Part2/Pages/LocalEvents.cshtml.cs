@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PROG7312_Part2.Models.Common.Event;
 using System.Text.Json;
 
 namespace PROG7312_Part2.Pages
@@ -52,11 +53,11 @@ namespace PROG7312_Part2.Pages
         {
             #region Music Events
             // Music Events
-            var ev1 = new Event { Title = "Music Concert", Category = "Music", Date = new DateOnly(2023, 10, 20) }; // Future event
+            var ev1 = new Event { Title = "Music Concert", Category = "Music", Date = new DateOnly(2023, 10, 20), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.music } }; // Future event
             var ev2 = new Event { Title = "Jazz Night", Category = "Music", Date = new DateOnly(2024, 10, 15) }; // Recent event
-            var ev3 = new Event { Title = "OktoberFest", Category = "Music", Date = new DateOnly(2024, 10, 26) }; // Future event
+            var ev3 = new Event { Title = "OktoberFest", Category = "Music", Date = new DateOnly(2024, 10, 26), CardDisplayInfo = new EventCardDisplayInfo {CardColor = EventCardColors.music}  }; // Future event
             var ev4 = new Event { Title = "EDM Festival", Category = "Music", Date = new DateOnly(2024, 10, 28) }; // Future event
-            var ev5 = new Event { Title = "Classical Evening", Category = "Music", Date = new DateOnly(2024, 11, 1) }; // Upcoming event
+            var ev5 = new Event { Title = "Classical Evening", Category = "Music", Date = new DateOnly(2024, 11, 1), CardDisplayInfo = new EventCardDisplayInfo {CardColor = EventCardColors.music}  }; // Upcoming event
             #endregion
 
             #region Education Events
@@ -79,11 +80,11 @@ namespace PROG7312_Part2.Pages
 
             #region Sports Events
             // Sports Events
-            var ev16 = new Event { Title = "SA20", Category = "Sports", Date = new DateOnly(2025, 1, 15) }; // Future event
+            var ev16 = new Event { Title = "SA20", Category = "Sports", Date = new DateOnly(2025, 1, 15), CardDisplayInfo = new EventCardDisplayInfo {CardColor = EventCardColors.music} }; // Future event
             var ev17 = new Event { Title = "Nicks 5m Dash", Category = "Sports", Date = new DateOnly(2024, 11, 3) }; // Upcoming event
-            var ev18 = new Event { Title = "Marathon 2025", Category = "Sports", Date = new DateOnly(2025, 2, 20) }; // Future event
+            var ev18 = new Event { Title = "Marathon 2025", Category = "Sports", Date = new DateOnly(2025, 2, 20), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.music } }; // Future event
             var ev19 = new Event { Title = "URC Final", Category = "Sports", Date = new DateOnly(2025, 4, 5) }; // Future event
-            var ev20 = new Event { Title = "Swimming Gala", Category = "Sports", Date = new DateOnly(2025, 5, 10) }; // Future event
+            var ev20 = new Event { Title = "Swimming Gala", Category = "Sports", Date = new DateOnly(2025, 5, 10), CardDisplayInfo = new EventCardDisplayInfo { CardColor = EventCardColors.music } }; // Future event
             #endregion
 
             #region Adding All Events
@@ -196,15 +197,6 @@ namespace PROG7312_Part2.Pages
             }
             return recommendedEvents;
         }
-
-        //Setting properties for the Events
-        public class Event
-        {
-            public string Title { get; set; }
-            public DateOnly Date { get; set; }
-            public string Category { get; set; }
-        }
-
         
     }
 
